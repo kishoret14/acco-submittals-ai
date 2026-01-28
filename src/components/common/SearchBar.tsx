@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -24,9 +24,10 @@ export function SearchBar({
   const [internalValue, setInternalValue] = useState(controlledValue || '');
   const value = controlledValue !== undefined ? controlledValue : internalValue;
 
-  const debouncedOnChange = useCallback(
-    debounce((val: string) => onChange(val), debounceMs),
-    [onChange, debounceMs]
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedOnChange = useMemo(
+    () => debounce((val: string) => onChange(val), debounceMs),
+    [debounceMs]
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
