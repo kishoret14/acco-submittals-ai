@@ -7,6 +7,7 @@ interface StatusBadgeProps {
   status: OverallStatus | EvidenceStatus | ProjectStatus | ConformanceJobStatus | string;
   showIcon?: boolean;
   size?: 'sm' | 'default' | 'lg';
+  className?: string;
 }
 
 const statusConfig: Record<string, {
@@ -31,7 +32,7 @@ const statusConfig: Record<string, {
   'Inactive': { variant: 'neutral', icon: <XCircle className="h-3 w-3" /> },
 };
 
-export function StatusBadge({ status, showIcon = true, size = 'default' }: StatusBadgeProps) {
+export function StatusBadge({ status, showIcon = true, size = 'default', className }: StatusBadgeProps) {
   const config = statusConfig[status] || { variant: 'neutral' as const, icon: null };
 
   return (
@@ -39,6 +40,7 @@ export function StatusBadge({ status, showIcon = true, size = 'default' }: Statu
       variant={config.variant}
       size={size}
       icon={showIcon ? config.icon : undefined}
+      className={className}
     >
       {config.label || status}
     </Badge>

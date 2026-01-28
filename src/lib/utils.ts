@@ -89,7 +89,7 @@ export function getStatusColor(status: string): string {
   return colors[status] || 'neutral';
 }
 
-export function debounce<T extends (...args: unknown[]) => void>(
+export function debounce<T extends (...args: any[]) => void>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
